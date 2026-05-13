@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard Bot</title>
+  <style>
+    body{
+      font-family:Arial;
+      background:#f5f7fb;
+      display:flex;
+      justify-content:center;
+      padding-top:50px;
+    }
+
+    .card{
+      width:400px;
+      background:#fff;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .bot{
+      padding:10px;
+      border:1px solid #eee;
+      margin:5px 0;
+      border-radius:8px;
+    }
+
+    button{
+      width:100%;
+      padding:10px;
+      background:#22c55e;
+      border:none;
+      color:white;
+      border-radius:8px;
+      cursor:pointer;
+      margin-top:10px;
+    }
+
+    h2{text-align:center}
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <h2>===== DASHBOARD =====</h2>
+
+  <p id="count">Loading...</p>
+
+  <div id="list"></div>
+
+  <button onclick="addBot()">+ Add New Bot</button>
+
+</div>
+
+<script>
+
+function getUID(){
+  let id = localStorage.getItem("uid")
+  if(!id){
+    id = Math.random().toString(36).substring(2,12)
+    localStorage.setItem("uid",id)
+  }
+  return id
+}
+
+const user_id = getUID()
+
+async function load(){
+
+  const res = await fetch("/api/get-bots?user_id="+user_id)
+  const data = await res.json()
+
+  document.getElementById("count").innerText =
+    "Bot Active: "+data.length+"/5"
+
+  document.getElementById("list").innerHTML =
+    data.map(b=>`
+      <div class="bot">
+        <b>${b.name}</b><br>
+        ${b.phone}<br>
+        ${b.status}
+      </div>
+    `).join("")
+}
+
+function addBot(){
+  window.location.href = "/api/go-safelink"
+}
+
+load()
+setInterval(load,3000)
+
+</script>
+
+</body>
+</html>
