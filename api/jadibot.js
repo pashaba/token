@@ -130,7 +130,7 @@ h1{
   <div class="code">${code}</div>
 
   <button class="btn copy" onclick="
-    navigator.clipboard.writeText('.jadibot ${code} 6285846588583');
+    navigator.clipboard.writeText('.jadibot ${code} 628xxxxx');
     this.innerText='✔ Tersalin!';
     setTimeout(()=>this.innerText='Copy Command',2000)
   ">
@@ -139,9 +139,9 @@ h1{
 
   <div class="info">
     Kirim ke bot dengan format:<br>
-    <b>.jadibot ${code} 6285846588583</b><br><br>
+    <b>.jadibot ${code} 628xxxxccc</b><br><br>
 
-    Kartu nomor: <span class="number">62858-6458-8583</span>
+    Kartu nomor: <span class="number">6285864588583</span>
   </div>
 
 </div>
