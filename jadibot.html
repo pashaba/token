@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sewa Bot WhatsApp Gratis</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #0b1220);
+      color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 30px;
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .btn-main {
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      color: white;
+      box-shadow: 0 10px 25px rgba(34,197,94,0.3);
+    }
+
+    .btn-main:hover {
+      transform: scale(1.05);
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-box {
+      background: rgba(30,41,59,0.9);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 25px;
+      border-radius: 16px;
+      width: 320px;
+      text-align: center;
+      animation: pop 0.3s ease;
+    }
+
+    .modal-box p {
+      font-size: 14px;
+      margin: 15px 0;
+      color: #cbd5e1;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn-yes {
+      flex: 1;
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn-no {
+      flex: 1;
+      background: #ef4444;
+      color: white;
+    }
+
+    /* LOADING */
+    .loading {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #334155;
+      border-top: 5px solid #22c55e;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* floating effect */
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: #22c55e;
+      filter: blur(120px);
+      opacity: 0.2;
+      top: -50px;
+      left: -50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glow"></div>
+
+  <div class="container">
+    <h1>Sewa Bot WhatsApp Gratis</h1>
+    <p>
+      Dapatkan akses bot WhatsApp otomatis secara gratis.  
+      Klik mulai untuk melanjutkan ke proses aktivasi melalui halaman verifikasi.
+    </p>
+
+    <button class="btn btn-main" onclick="openModal()">
+      🚀 Mulai Jadi Bot Gratis
+    </button>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <h3>Konfirmasi</h3>
+      <p>
+        Kamu akan diarahkan ke halaman verifikasi (Safelinku) yang berisi iklan.
+        Lanjutkan?
+      </p>
+
+      <div class="btn-group">
+        <button class="btn btn-yes" onclick="startLoading()">Lanjutkan</button>
+        <button class="btn btn-no" onclick="closeModal()">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Mengarahkan ke halaman verifikasi...</p>
+  </div>
+
+  <script>
+    const safelink = "https://sfl.gl/8W3qpI";
+
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function startLoading() {
+      document.getElementById("modal").style.display = "none";
+      document.getElementById("loading").style.display = "flex";
+
+      setTimeout(() => {
+        window.location.href = safelink;
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
