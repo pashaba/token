@@ -198,7 +198,7 @@ h1{
   <div class="code">${code}</div>
 
   <button class="btn btn-copy" onclick="
-    navigator.clipboard.writeText('.jadibot ${code} 6285864588583');
+    navigator.clipboard.writeText('.jadibot ${code} 628xxxxxx');
     this.innerText='✔ Command Tersalin!';
     setTimeout(()=>this.innerText='📋 Copy Command',2000)
   ">
