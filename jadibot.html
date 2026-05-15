@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,8 +39,8 @@ top:0;
 left:0;
 width:100%;
 z-index:9999;
-backdrop-filter:blur(20px);
-background:rgba(10,10,10,.7);
+backdrop-filter:blur(18px);
+background:rgba(10,10,10,.75);
 border-bottom:1px solid rgba(255,255,255,.06);
 }
 
@@ -95,6 +95,7 @@ border-radius:15px;
 font-weight:700;
 cursor:pointer;
 transition:.3s;
+font-size:15px;
 }
 
 .btn:hover{
@@ -171,7 +172,7 @@ color:black;
 .overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.65);
+background:rgba(0,0,0,.7);
 backdrop-filter:blur(5px);
 display:none;
 z-index:99998;
@@ -185,7 +186,7 @@ display:block;
 min-height:100vh;
 max-width:1400px;
 margin:auto;
-padding:150px 30px 100px;
+padding:160px 30px 100px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
 gap:70px;
@@ -205,10 +206,10 @@ font-size:14px;
 }
 
 .hero h1{
-font-size:85px;
+font-size:84px;
 line-height:1;
 font-weight:900;
-margin-bottom:30px;
+margin-bottom:28px;
 }
 
 .hero h1 span{
@@ -219,7 +220,7 @@ color:#8f8f8f;
 color:#9f9f9f;
 font-size:18px;
 line-height:1.9;
-max-width:650px;
+max-width:620px;
 margin-bottom:40px;
 }
 
@@ -227,31 +228,6 @@ margin-bottom:40px;
 display:flex;
 gap:16px;
 flex-wrap:wrap;
-margin-bottom:45px;
-}
-
-.hero-stats{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.hero-stat{
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.06);
-border-radius:24px;
-padding:24px;
-min-width:170px;
-}
-
-.hero-stat h3{
-font-size:34px;
-margin-bottom:8px;
-}
-
-.hero-stat p{
-margin:0;
-font-size:14px;
 }
 
 .preview-card{
@@ -259,14 +235,13 @@ background:rgba(255,255,255,.03);
 border:1px solid rgba(255,255,255,.06);
 border-radius:35px;
 padding:30px;
-backdrop-filter:blur(15px);
 }
 
 .preview-top{
 display:flex;
 align-items:center;
 justify-content:space-between;
-margin-bottom:35px;
+margin-bottom:30px;
 }
 
 .dots{
@@ -279,7 +254,6 @@ width:12px;
 height:12px;
 border-radius:50%;
 background:white;
-opacity:.8;
 }
 
 .preview-content{
@@ -291,7 +265,7 @@ gap:18px;
 .preview-box{
 background:rgba(255,255,255,.03);
 border:1px solid rgba(255,255,255,.06);
-border-radius:22px;
+border-radius:20px;
 padding:22px;
 display:flex;
 justify-content:space-between;
@@ -300,10 +274,6 @@ align-items:center;
 
 .preview-box span{
 color:#9f9f9f;
-}
-
-.preview-box strong{
-font-size:17px;
 }
 
 .section{
@@ -318,13 +288,13 @@ margin-bottom:70px;
 }
 
 .section-title h2{
-font-size:60px;
-margin-bottom:20px;
+font-size:58px;
+margin-bottom:18px;
 }
 
 .section-title p{
 color:#9f9f9f;
-max-width:750px;
+max-width:700px;
 margin:auto;
 line-height:1.9;
 }
@@ -382,7 +352,7 @@ margin-bottom:25px;
 display:flex;
 flex-wrap:wrap;
 gap:10px;
-margin-bottom:30px;
+margin-bottom:28px;
 }
 
 .tag{
@@ -420,7 +390,7 @@ margin-bottom:25px;
 }
 
 .feature-card h3{
-font-size:35px;
+font-size:34px;
 margin-bottom:25px;
 }
 
@@ -509,10 +479,10 @@ font-size:58px;
 }
 
 .section-title h2{
-font-size:45px;
+font-size:44px;
 }
 
-.btn-white{
+.nav-buttons .btn{
 display:none;
 }
 
@@ -532,33 +502,36 @@ display:flex;
 <a href="#home" onclick="closeMenu()">🏠 Home</a>
 <a href="#scripts" onclick="closeMenu()">🤖 Scripts</a>
 <a href="#features" onclick="closeMenu()">⚡ Features</a>
-<a href="#docs" onclick="closeMenu()">📘 Documentation</a>
-<a href="#" onclick="openPopup('phoenix')">🚀 Create New Bot</a>
+<a href="#docs" onclick="scrollDocs()">📘 Documentation</a>
+<a href="#" onclick="openPopup('phoenix')">🚀 Create Bot</a>
 </div>
 
 <div class="popup" id="popup">
+
 <div class="popup-box">
 
 <div class="popup-icon">🚀</div>
 
-<h2>Continue Access</h2>
+<h2>Buat Bot Gratis</h2>
 
 <p>
-Untuk membuat bot gratis kamu harus melewati safelink terlebih dahulu.
-Setelah selesai kamu akan diarahkan ke halaman koneksi bot.
+Untuk melanjutkan pembuatan bot kamu harus melewati safelink terlebih dahulu.
 </p>
 
 <div class="popup-buttons">
+
 <button class="btn btn-dark" onclick="closePopup()">
-Cancel
+Batalkan
 </button>
 
 <button class="btn btn-white" onclick="continueSafelink()">
-Continue
+Lanjutkan
 </button>
+
 </div>
 
 </div>
+
 </div>
 
 <nav>
@@ -571,18 +544,25 @@ Continue
 
 <div>
 <h1>Phoenix Platform</h1>
-<p>Modern WhatsApp Automation</p>
+<p>Modern WhatsApp Bot</p>
 </div>
 
 </div>
 
 <div class="nav-buttons">
 
-<button class="btn btn-white" onclick="document.getElementById('scripts').scrollIntoView({behavior:'smooth'})">
-Explore Scripts
+<button class="btn btn-dark"
+onclick="scrollDocs()">
+Documentation
 </button>
 
-<div class="menu-toggle" onclick="toggleMenu()">
+<button class="btn btn-white"
+onclick="openPopup('phoenix')">
+Create Bot
+</button>
+
+<div class="menu-toggle"
+onclick="toggleMenu()">
 <span></span>
 <span></span>
 <span></span>
@@ -599,50 +579,32 @@ Explore Scripts
 <div>
 
 <div class="hero-badge">
-⚡ Professional WhatsApp Bot Platform
+⚡ Simple & Modern WhatsApp Bot Platform
 </div>
 
 <h1>
-Build Modern
-Bots
-<span>Without Complexity.</span>
+Buat Bot WhatsApp
+Lebih Mudah &
+<span>Lebih Modern.</span>
 </h1>
 
 <p>
-Phoenix Platform menghadirkan pengalaman membuat bot WhatsApp
-dengan tampilan modern, sistem cepat, fitur premium,
-dan automation profesional untuk semua kebutuhan.
+Platform sederhana untuk membuat bot WhatsApp multi device
+dengan tampilan modern, fitur lengkap,
+dan proses cepat tanpa ribet.
 </p>
 
 <div class="hero-buttons">
 
 <button class="btn btn-white"
-onclick="document.getElementById('scripts').scrollIntoView({behavior:'smooth'})">
-Explore Scripts
+onclick="openPopup('phoenix')">
+Create Bot
 </button>
 
-<button class="btn btn-dark">
+<button class="btn btn-dark"
+onclick="scrollDocs()">
 Documentation
 </button>
-
-</div>
-
-<div class="hero-stats">
-
-<div class="hero-stat">
-<h3>120K+</h3>
-<p>Active Users</p>
-</div>
-
-<div class="hero-stat">
-<h3>99.9%</h3>
-<p>Server Uptime</p>
-</div>
-
-<div class="hero-stat">
-<h3>24/7</h3>
-<p>Automation</p>
-</div>
 
 </div>
 
@@ -673,17 +635,17 @@ Documentation
 
 <div class="preview-box">
 <span>⚡ Fast Response</span>
-<strong>0 Delay System</strong>
+<strong>No Delay System</strong>
 </div>
 
 <div class="preview-box">
-<span>🧠 AI Automation</span>
-<strong>Premium Features</strong>
+<span>🛠️ Full Features</span>
+<strong>Economy & Group</strong>
 </div>
 
 <div class="preview-box">
 <span>🔒 Security</span>
-<strong>Encrypted Access</strong>
+<strong>Safe Access</strong>
 </div>
 
 </div>
@@ -697,45 +659,47 @@ Documentation
 <section class="section" id="scripts">
 
 <div class="section-title">
-<h2>Choose Your Script</h2>
+
+<h2>Choose Script</h2>
 
 <p>
-Pilih script bot terbaik dengan fitur modern dan pengalaman premium.
+Pilih script bot yang ingin digunakan.
 </p>
+
 </div>
 
 <div class="script-grid">
 
 <div class="script-card">
 
-<img src="https://files.catbox.moe/2m8m7w.jpg">
+<img src="./img/phoenix.jpg">
 
 <div class="script-content">
 
 <div class="script-badge">
-AVAILABLE
+READY
 </div>
 
 <h3>Phoenix MD</h3>
 
 <p>
-Bot WhatsApp modern dengan fitur economy,
-AI tools, casino system, automation,
-group management, dan realtime system.
+Script bot WhatsApp multi device
+dengan fitur economy,
+group tools, dan menu modern.
 </p>
 
 <div class="tags">
 
+<div class="tag">Multi Device</div>
 <div class="tag">Economy</div>
-<div class="tag">AI</div>
-<div class="tag">Casino</div>
-<div class="tag">Automation</div>
+<div class="tag">Group</div>
+<div class="tag">Tools</div>
 
 </div>
 
 <button class="btn btn-white"
 onclick="openPopup('phoenix')">
-Create New Bot
+Create Bot
 </button>
 
 </div>
@@ -744,7 +708,7 @@ Create New Bot
 
 <div class="script-card">
 
-<img src="https://files.catbox.moe/v8fj6z.jpg">
+<img src="./img/nebula.jpg">
 
 <div class="script-content">
 
@@ -755,8 +719,8 @@ COMING SOON
 <h3>Nebula Assistant</h3>
 
 <p>
-Modern AI assistant platform dengan
-automation dan smart integration system.
+Assistant bot modern
+dengan sistem automation.
 </p>
 
 <button class="btn btn-dark">
@@ -769,7 +733,7 @@ Coming Soon
 
 <div class="script-card">
 
-<img src="https://files.catbox.moe/n5v1q0.jpg">
+<img src="./img/zenith.jpg">
 
 <div class="script-content">
 
@@ -780,33 +744,8 @@ COMING SOON
 <h3>Zenith Music</h3>
 
 <p>
-Entertainment music bot dengan realtime
-audio system dan modern dashboard.
-</p>
-
-<button class="btn btn-dark">
-Coming Soon
-</button>
-
-</div>
-
-</div>
-
-<div class="script-card">
-
-<img src="https://files.catbox.moe/2m8m7w.jpg">
-
-<div class="script-content">
-
-<div class="script-badge">
-COMING SOON
-</div>
-
-<h3>Nova Security</h3>
-
-<p>
-Security automation bot dengan
-protection tools dan smart monitoring.
+Music bot modern
+dengan realtime audio system.
 </p>
 
 <button class="btn btn-dark">
@@ -828,8 +767,7 @@ Coming Soon
 <h2>Bot Features</h2>
 
 <p>
-Ratusan fitur modern untuk kebutuhan group,
-automation, entertainment, dan economy.
+Beberapa fitur yang tersedia pada Phoenix MD.
 </p>
 
 </div>
@@ -846,9 +784,8 @@ automation, entertainment, dan economy.
 
 <div class="command">.menu</div>
 <div class="command">.profil</div>
-<div class="command">.runtime</div>
-<div class="command">.owner</div>
 <div class="command">.ping</div>
+<div class="command">.owner</div>
 
 </div>
 
@@ -866,7 +803,6 @@ automation, entertainment, dan economy.
 <div class="command">.add</div>
 <div class="command">.promote</div>
 <div class="command">.demote</div>
-<div class="command">.tagall</div>
 
 </div>
 
@@ -884,25 +820,6 @@ automation, entertainment, dan economy.
 <div class="command">.bank</div>
 <div class="command">.daily</div>
 <div class="command">.withdraw</div>
-<div class="command">.deposit</div>
-
-</div>
-
-</div>
-
-<div class="feature-card">
-
-<div class="feature-icon">🎰</div>
-
-<h3>Casino Menu</h3>
-
-<div class="commands">
-
-<div class="command">.slot</div>
-<div class="command">.casino</div>
-<div class="command">.blackjack</div>
-<div class="command">.hit</div>
-<div class="command">.stand</div>
 
 </div>
 
@@ -919,7 +836,7 @@ automation, entertainment, dan economy.
 <h2>Documentation</h2>
 
 <p>
-Pelajari cara menggunakan command dan sistem Phoenix MD.
+Cara menggunakan command Phoenix MD.
 </p>
 
 </div>
@@ -934,11 +851,10 @@ Pelajari cara menggunakan command dan sistem Phoenix MD.
 
 <div class="commands">
 
-<div class="command">.menu = menampilkan menu</div>
-<div class="command">.saldo = cek saldo user</div>
-<div class="command">.daily = claim hadiah harian</div>
-<div class="command">.slot = bermain slot game</div>
-<div class="command">.kick = kick member group</div>
+<div class="command">.menu = membuka menu</div>
+<div class="command">.saldo = cek saldo</div>
+<div class="command">.daily = claim harian</div>
+<div class="command">.kick = kick member</div>
 
 </div>
 
@@ -949,7 +865,7 @@ Pelajari cara menggunakan command dan sistem Phoenix MD.
 </section>
 
 <footer>
-© 2026 Phoenix Platform — Professional Landing Page
+© 2026 Phoenix Platform
 </footer>
 
 <script>
@@ -957,31 +873,58 @@ Pelajari cara menggunakan command dan sistem Phoenix MD.
 let selectedScript = null
 
 function toggleMenu(){
-document.getElementById('mobileMenu').classList.toggle('active')
-document.getElementById('overlay').classList.toggle('active')
+
+document.getElementById('mobileMenu')
+.classList.toggle('active')
+
+document.getElementById('overlay')
+.classList.toggle('active')
+
 }
 
 function closeMenu(){
-document.getElementById('mobileMenu').classList.remove('active')
-document.getElementById('overlay').classList.remove('active')
+
+document.getElementById('mobileMenu')
+.classList.remove('active')
+
+document.getElementById('overlay')
+.classList.remove('active')
+
 }
 
 function openPopup(script){
 
 selectedScript = script
 
-document.getElementById('popup').style.display='flex'
+document.getElementById('popup')
+.style.display='flex'
+
 }
 
 function closePopup(){
-document.getElementById('popup').style.display='none'
+
+document.getElementById('popup')
+.style.display='none'
+
 }
 
 function continueSafelink(){
 
 if(selectedScript === 'phoenix'){
-window.location.href='https://sfl.gl/8W3qpI'
+
+window.location.href =
+'https://sfl.gl/8W3qpI'
+
 }
+
+}
+
+function scrollDocs(){
+
+document.getElementById('docs')
+.scrollIntoView({
+behavior:'smooth'
+})
 
 }
 
