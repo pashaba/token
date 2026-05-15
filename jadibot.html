@@ -15,7 +15,7 @@
     }
 
     body {
-      background: #040816;
+      background: #0f172a;
       color: white;
       overflow-x: hidden;
     }
@@ -25,8 +25,8 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at top left, rgba(0,255,255,0.15), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(140,0,255,0.2), transparent 35%);
+        radial-gradient(circle at top left, rgba(59,130,246,0.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(99,102,241,0.16), transparent 35%);
       z-index: -1;
     }
 
@@ -76,6 +76,7 @@
     }
 
     .mobile-menu {
+      overflow-y: auto;
       position: fixed;
       top: 0;
       right: -100%;
@@ -114,6 +115,10 @@
       transform: translateX(5px);
     }
 
+    body.menu-open {
+      overflow: hidden;
+    }
+
     .menu-overlay {
       position: fixed;
       inset: 0;
@@ -146,18 +151,18 @@
       width: 55px;
       height: 55px;
       border-radius: 18px;
-      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      background: linear-gradient(135deg,#3b82f6,#6366f1);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 25px;
-      box-shadow: 0 0 40px rgba(0,255,255,0.4);
+      box-shadow: 0 10px 30px rgba(59,130,246,0.25);
     }
 
     .logo h1 {
       font-size: 28px;
       font-weight: 800;
-      background: linear-gradient(90deg,#00e5ff,#b84cff);
+      background: linear-gradient(90deg,#60a5fa,#818cf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -166,12 +171,12 @@
       padding: 14px 24px;
       border-radius: 15px;
       border: none;
-      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      background: linear-gradient(135deg,#3b82f6,#6366f1);
       color: white;
       font-weight: 700;
       cursor: pointer;
       transition: .3s;
-      box-shadow: 0 0 30px rgba(0,255,255,0.35);
+      box-shadow: 0 10px 30px rgba(59,130,246,0.25);
     }
 
     .nav-btn:hover {
@@ -196,7 +201,7 @@
     }
 
     .hero span {
-      background: linear-gradient(90deg,#00e5ff,#9d4dff);
+      background: linear-gradient(90deg,#60a5fa,#818cf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -225,10 +230,10 @@
     }
 
     .btn-main {
-      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      background: linear-gradient(135deg,#3b82f6,#6366f1);
       border: none;
       color: white;
-      box-shadow: 0 0 35px rgba(0,255,255,0.35);
+      box-shadow: 0 10px 30px rgba(59,130,246,0.25);
     }
 
     .btn-secondary {
@@ -249,7 +254,7 @@
       border-radius: 35px;
       padding: 35px;
       backdrop-filter: blur(25px);
-      box-shadow: 0 0 60px rgba(0,255,255,0.12);
+      box-shadow: 0 15px 40px rgba(15,23,42,0.35);
     }
 
     .dashboard-title {
@@ -393,7 +398,7 @@
       padding: 10px 14px;
       border-radius: 14px;
       font-size: 13px;
-      color: #00e5ff;
+      color: #60a5fa;
     }
 
     .select-btn {
@@ -401,7 +406,7 @@
       padding: 18px;
       border-radius: 18px;
       border: none;
-      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      background: linear-gradient(135deg,#3b82f6,#6366f1);
       color: white;
       font-weight: 800;
       cursor: pointer;
@@ -421,7 +426,7 @@
       width: 80px;
       height: 80px;
       border-radius: 25px;
-      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      background: linear-gradient(135deg,#3b82f6,#6366f1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -468,7 +473,7 @@
     }
 
     .doc-item h4 {
-      color: #00e5ff;
+      color: #60a5fa;
       margin-bottom: 8px;
     }
 
@@ -485,7 +490,7 @@
       padding: 80px 40px;
       text-align: center;
       backdrop-filter: blur(20px);
-      box-shadow: 0 0 60px rgba(0,255,255,0.12);
+      box-shadow: 0 15px 40px rgba(15,23,42,0.35);
     }
 
     .cta-box h2 {
@@ -543,7 +548,7 @@
       height: 90px;
       margin: auto;
       border-radius: 30px;
-      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      background: linear-gradient(135deg,#3b82f6,#6366f1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -588,7 +593,7 @@
     }
 
     .popup-continue {
-      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      background: linear-gradient(135deg,#3b82f6,#6366f1);
       color: white;
       box-shadow: 0 0 35px rgba(0,255,255,0.25);
     }
@@ -650,10 +655,10 @@
 
   </div>
 </div><div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div><div class="mobile-menu" id="mobileMenu">
-  <a href="#">🏠 Home</a>
-  <a href="#">🤖 Scripts</a>
-  <a href="#">⚡ Features</a>
-  <a href="#">📘 Documentation</a>
+  <a href="#top" onclick="closeMenu()">🏠 Home</a>
+  <a href="#scripts" onclick="closeMenu()">🤖 Scripts</a>
+  <a href="#features" onclick="closeMenu()">⚡ Features</a>
+  <a href="#docs" onclick="closeMenu()">📘 Documentation</a>
   <a href="#" onclick="openPopup()">🚀 Add New Bot</a>
 </div><nav>
     <div class="nav-container">
@@ -674,7 +679,7 @@
   </div>
 </div>
 
-  </nav>  <section class="hero">
+  </nav>  <section class="hero" id="top">
     <div>
       <h2>Create Your <span>Dream Bot</span></h2><p>
     Phoenix MD menghadirkan dashboard modern dengan fitur economy,
@@ -702,12 +707,13 @@
     <div class="stat-card"><span>💎 Status</span><strong>Free 🆓</strong></div>
     <div class="stat-card"><span>💰 Saldo</span><strong>Rp672.673.839.619</strong></div>
     <div class="stat-card"><span>🏦 Bank</span><strong>Rp3.000.000.010.000</strong></div>
-    <div class="stat-card"><span>🎟️ Limit</span><strong>2481</strong></div>
+    
     <div class="stat-card"><span>📶 Ping</span><strong>1960 ms</strong></div>
+    <div class="stat-card"><span>🏆 Rank</span><strong>#1 Global</strong></div>
   </div>
 </div>
 
-  </section>  <section class="section">
+  </section>  <section class="section" id="scripts">
     <div class="section-title">
       <h2>Choose Your Script</h2>
       <p>Pilih script bot modern dengan tampilan premium dan fitur terbaik.</p>
@@ -776,7 +782,7 @@
 
 </div>
 
-  </section>  <section class="section">
+  </section>  <section class="section" id="features">
     <div class="section-title">
       <h2>Bot Features</h2>
       <p>Ratusan fitur modern untuk kebutuhan group, game, entertainment, dan automation.</p>
@@ -820,7 +826,7 @@
 
 </div>
 
-  </section>  <section class="section">
+  </section>  <section class="section" id="docs">
     <div class="section-title">
       <h2>Documentation</h2>
       <p>Pelajari cara menggunakan command Phoenix MD.</p>
@@ -883,7 +889,7 @@
     }
 
     function goSafelink() {
-      window.location.href = 'https://example.com'
+      window.location.href = 'https://sfl.gl/8W3qpI'
     }
 
     function toggleMenu() {
