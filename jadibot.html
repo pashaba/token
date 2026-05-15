@@ -415,6 +415,101 @@
       font-size: 18px;
     }
 
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      padding: 20px;
+    }
+
+    .popup-box {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(135deg,rgba(8,15,35,0.95),rgba(18,10,40,0.95));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 35px;
+      padding: 40px 35px;
+      text-align: center;
+      box-shadow: 0 0 80px rgba(0,255,255,0.15);
+      animation: popupShow .25s ease;
+    }
+
+    @keyframes popupShow {
+      from {
+        opacity: 0;
+        transform: scale(.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .popup-icon {
+      width: 90px;
+      height: 90px;
+      margin: auto;
+      border-radius: 30px;
+      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 50px rgba(0,255,255,0.25);
+    }
+
+    .popup-box h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    .popup-box p {
+      color: #b5b5b5;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .popup-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .popup-cancel,
+    .popup-continue {
+      flex: 1;
+      padding: 16px;
+      border-radius: 18px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .3s;
+      font-size: 15px;
+    }
+
+    .popup-cancel {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .popup-continue {
+      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      color: white;
+      box-shadow: 0 0 35px rgba(0,255,255,0.25);
+    }
+
+    .popup-cancel:hover,
+    .popup-continue:hover {
+      transform: translateY(-3px);
+    }
+
     footer {
       border-top: 1px solid rgba(255,255,255,0.08);
       padding: 35px;
@@ -441,7 +536,22 @@
       }
     }
   </style></head>
-<body>  <nav>
+<body>  <div id="customPopup" class="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-icon">🚀</div><h2>Free Bot Access</h2>
+
+<p>
+  Untuk menjadi bot secara GRATIS kamu harus melewati safelink terlebih dahulu.
+  Setelah selesai kamu akan diarahkan ke halaman koneksi bot.
+</p>
+
+<div class="popup-buttons">
+  <button class="popup-cancel" onclick="closePopup()">Batalkan</button>
+  <button class="popup-continue" onclick="goSafelink()">Lanjutkan</button>
+</div>
+
+  </div>
+</div><nav>
     <div class="nav-container">
       <div class="logo">
         <div class="logo-icon">🔥</div>
@@ -651,13 +761,25 @@
     © 2026 Phoenix Multi Device — Premium WhatsApp Bot Dashboard
   </footer>  <script>
     function openPopup() {
-      const lanjut = confirm(
-        'Untuk menjadi bot secara GRATIS kamu akan melewati safelink terlebih dahulu.\\n\\nTekan OK untuk lanjut atau Cancel untuk batalkan.'
-      )
-
-      if (lanjut) {
-        window.location.href = 'https://example.com'
-      }
+      document.getElementById('customPopup').style.display = 'flex'
+      document.body.style.overflow = 'hidden'
     }
+
+    function closePopup() {
+      document.getElementById('customPopup').style.display = 'none'
+      document.body.style.overflow = 'auto'
+    }
+
+    function goSafelink() {
+      window.location.href = 'https://example.com'
+    }
+
+    window.addEventListener('click', function(e) {
+      const popup = document.getElementById('customPopup')
+
+      if (e.target === popup) {
+        closePopup()
+      }
+    })
   </script></body>
 </html>
