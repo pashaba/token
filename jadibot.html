@@ -39,6 +39,94 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
+    .menu-toggle {
+      display: none;
+      width: 55px;
+      height: 55px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      transition: .3s;
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 3px;
+      border-radius: 999px;
+      background: white;
+      transition: .3s;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(13px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-13px);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 320px;
+      height: 100vh;
+      background: rgba(5,10,25,0.96);
+      backdrop-filter: blur(25px);
+      border-left: 1px solid rgba(255,255,255,0.08);
+      z-index: 99999;
+      padding: 100px 30px 30px;
+      transition: .4s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: -20px 0 60px rgba(0,255,255,0.12);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu a {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      transition: .3s;
+    }
+
+    .mobile-menu a:hover {
+      background: linear-gradient(135deg,#00e5ff20,#7b2cff20);
+      border-color: rgba(0,255,255,0.25);
+      transform: translateX(5px);
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      z-index: 99998;
+      display: none;
+    }
+
+    .menu-overlay.active {
+      display: block;
+    }
+
     .nav-container {
       max-width: 1300px;
       margin: auto;
@@ -519,6 +607,16 @@
       backdrop-filter: blur(15px);
     }
 
+    @media(max-width:900px){
+      .nav-btn {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
     @media(max-width:768px){
       .hero h2,
       .section-title h2,
@@ -551,6 +649,12 @@
 </div>
 
   </div>
+</div><div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div><div class="mobile-menu" id="mobileMenu">
+  <a href="#">🏠 Home</a>
+  <a href="#">🤖 Scripts</a>
+  <a href="#">⚡ Features</a>
+  <a href="#">📘 Documentation</a>
+  <a href="#" onclick="openPopup()">🚀 Add New Bot</a>
 </div><nav>
     <div class="nav-container">
       <div class="logo">
@@ -559,7 +663,15 @@
           <h1>Phoenix Multi Device</h1>
           <small style="color:#aaa">Premium WhatsApp Bot Platform</small>
         </div>
-      </div><button class="nav-btn" onclick="openPopup()">Add New Bot</button>
+      </div><div style="display:flex;align-items:center;gap:15px">
+    <button class="nav-btn" onclick="openPopup()">Add New Bot</button>
+
+    <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </div>
 
   </nav>  <section class="hero">
@@ -772,6 +884,20 @@
 
     function goSafelink() {
       window.location.href = 'https://example.com'
+    }
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('active')
+      document.getElementById('menuOverlay').classList.toggle('active')
+      document.getElementById('menuToggle').classList.toggle('active')
+      document.body.classList.toggle('menu-open')
+    }
+
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('active')
+      document.getElementById('menuOverlay').classList.remove('active')
+      document.getElementById('menuToggle').classList.remove('active')
+      document.body.classList.remove('menu-open')
     }
 
     window.addEventListener('click', function(e) {
