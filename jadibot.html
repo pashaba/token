@@ -1,353 +1,663 @@
-export default function PhoenixMDWebsite() { const scripts = [ { name: 'Phoenix MD', status: 'ONLINE', image: 'https://files.catbox.moe/2m8m7w.jpg', description: 'WhatsApp bot modern dengan economy system, AI tools, game, dan fitur group terlengkap.', color: 'from-cyan-500 to-blue-600', glow: 'shadow-cyan-500/30', features: ['Economy', 'AI System', 'Group Tools', 'Pet Battle', 'Casino', 'Realtime'], docs: [ { cmd: '.menu', desc: 'Menampilkan seluruh menu bot' }, { cmd: '.saldo', desc: 'Melihat saldo user' }, { cmd: '.daily', desc: 'Claim hadiah harian' }, { cmd: '.slot', desc: 'Bermain slot machine' }, { cmd: '.kick @user', desc: 'Kick member group' } ] }, { name: 'Nebula Assistant', status: 'COMING SOON', image: 'https://files.catbox.moe/v8fj6z.jpg', description: 'Bot AI automation premium dengan smart response system.', color: 'from-purple-500 to-pink-600', glow: 'shadow-pink-500/30', features: ['Smart AI', 'Auto Reply', 'Realtime Logs', 'Security'], docs: [] }, { name: 'Zenith Music', status: 'COMING SOON', image: 'https://files.catbox.moe/n5v1q0.jpg', description: 'Music entertainment bot dengan UI futuristik.', color: 'from-orange-500 to-red-600', glow: 'shadow-orange-500/30', features: ['Music', 'Streaming', 'Queue', 'Visualizer'], docs: [] }, { name: 'Shadow Core', status: 'COMING SOON', image: 'https://files.catbox.moe/q8gk0m.jpg', description: 'Cloud automation assistant dengan dashboard realtime.', color: 'from-emerald-500 to-teal-600', glow: 'shadow-emerald-500/30', features: ['Cloud Sync', 'Monitoring', 'Analytics'], docs: [] } ]
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phoenix Multi Device</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
 
-const menuCards = [ { icon: '⚙️', title: 'Main Menu', commands: ['.menu', '.profil', '.ping', '.runtime', '.owner'] }, { icon: '👥', title: 'Group Menu', commands: ['.kick', '.add', '.promote', '.demote', '.tagall', '.rename'] }, { icon: '💰', title: 'Economy Menu', commands: ['.saldo', '.bank', '.deposit', '.withdraw', '.daily', '.leaderboard'] }, { icon: '🎰', title: 'Casino Menu', commands: ['.slot', '.casino', '.blackjack', '.hit', '.stand'] }, { icon: '🐾', title: 'Pet Menu', commands: ['.gacha', '.mypet', '.equip', '.battle'] }, { icon: '🎨', title: 'Tools Menu', commands: ['.sticker', '.toimg', '.brat'] } ]
+    body {
+      background: #040816;
+      color: white;
+      overflow-x: hidden;
+    }
 
-return ( <div className="bg-[#030712] text-white min-h-screen overflow-hidden"> <div className="fixed inset-0 opacity-30 pointer-events-none"> <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[180px]"></div> <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-600 rounded-full blur-[180px]"></div> </div>
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(0,255,255,0.15), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(140,0,255,0.2), transparent 35%);
+      z-index: -1;
+    }
 
-<header className="sticky top-0 z-50 backdrop-blur-2xl border-b border-white/10 bg-black/20">
-    <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div className="flex items-center gap-4">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center text-2xl font-black shadow-2xl shadow-cyan-500/30">
-          🔥
-        </div>
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      background: rgba(0,0,0,0.35);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
+    .nav-container {
+      max-width: 1300px;
+      margin: auto;
+      padding: 18px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 18px;
+      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      box-shadow: 0 0 40px rgba(0,255,255,0.4);
+    }
+
+    .logo h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(90deg,#00e5ff,#b84cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-btn {
+      padding: 14px 24px;
+      border-radius: 15px;
+      border: none;
+      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .3s;
+      box-shadow: 0 0 30px rgba(0,255,255,0.35);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .hero {
+      max-width: 1300px;
+      margin: auto;
+      padding: 100px 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h2 {
+      font-size: 75px;
+      line-height: 1.05;
+      font-weight: 900;
+      margin-bottom: 30px;
+    }
+
+    .hero span {
+      background: linear-gradient(90deg,#00e5ff,#9d4dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #b5b5b5;
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-main,
+    .btn-secondary {
+      padding: 18px 35px;
+      border-radius: 20px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      border: none;
+      color: white;
+      box-shadow: 0 0 35px rgba(0,255,255,0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-main:hover,
+    .btn-secondary:hover {
+      transform: translateY(-5px);
+    }
+
+    .dashboard {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 35px;
+      padding: 35px;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 0 60px rgba(0,255,255,0.12);
+    }
+
+    .dashboard-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .online {
+      background: rgba(0,255,120,0.15);
+      color: #00ff90;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid rgba(0,255,120,0.2);
+    }
+
+    .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .stat-card {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 20px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section {
+      max-width: 1300px;
+      margin: auto;
+      padding: 100px 25px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: 60px;
+      margin-bottom: 15px;
+      font-weight: 900;
+    }
+
+    .section-title p {
+      color: #b5b5b5;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.8;
+    }
+
+    .scripts-grid,
+    .features-grid,
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 30px;
+    }
+
+    .script-card,
+    .feature-card,
+    .doc-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      transition: .4s;
+    }
+
+    .script-card:hover,
+    .feature-card:hover,
+    .doc-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0,255,255,0.25);
+      box-shadow: 0 0 40px rgba(0,255,255,0.15);
+    }
+
+    .script-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .script-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .5s;
+    }
+
+    .script-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .script-content {
+      padding: 28px;
+    }
+
+    .script-content h3 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .script-content p {
+      color: #b5b5b5;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tag {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      color: #00e5ff;
+    }
+
+    .select-btn {
+      width: 100%;
+      padding: 18px;
+      border-radius: 18px;
+      border: none;
+      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .3s;
+      font-size: 16px;
+    }
+
+    .select-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .feature-card {
+      padding: 35px;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 25px;
+      background: linear-gradient(135deg,#00e5ff,#7b2cff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 40px rgba(0,255,255,0.2);
+    }
+
+    .feature-card h3 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .command-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .command {
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+
+    .doc-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .doc-content {
+      padding: 30px;
+    }
+
+    .doc-item {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .doc-item h4 {
+      color: #00e5ff;
+      margin-bottom: 8px;
+    }
+
+    .cta {
+      max-width: 1200px;
+      margin: auto;
+      padding: 80px 25px 120px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg,rgba(0,229,255,0.12),rgba(123,44,255,0.12));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 40px;
+      padding: 80px 40px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 60px rgba(0,255,255,0.12);
+    }
+
+    .cta-box h2 {
+      font-size: 65px;
+      margin-bottom: 25px;
+      font-weight: 900;
+    }
+
+    .cta-box p {
+      max-width: 850px;
+      margin: auto;
+      color: #b5b5b5;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      font-size: 18px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 35px;
+      text-align: center;
+      color: #777;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(15px);
+    }
+
+    @media(max-width:768px){
+      .hero h2,
+      .section-title h2,
+      .cta-box h2 {
+        font-size: 45px;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style></head>
+<body>  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon">🔥</div>
         <div>
-          <h1 className="text-3xl font-black tracking-wide bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-            Phoenix Multi Device
-          </h1>
-          <p className="text-gray-400 text-sm">Premium WhatsApp Bot Platform</p>
+          <h1>Phoenix Multi Device</h1>
+          <small style="color:#aaa">Premium WhatsApp Bot Platform</small>
         </div>
-      </div>
-
-      <div className="hidden md:flex items-center gap-4">
-        <button className="px-5 py-2 rounded-xl hover:bg-white/10 transition">
-          Features
-        </button>
-
-        <button className="px-5 py-2 rounded-xl hover:bg-white/10 transition">
-          Documentation
-        </button>
-
-        <button className="px-6 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 font-bold hover:scale-105 transition shadow-2xl shadow-cyan-500/30">
-          Add New Bot
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <section className="relative z-10 max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-20 items-center">
-    <div>
-      <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 mb-8 backdrop-blur-xl">
-        <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></div>
-        #1 Modern WhatsApp Bot Dashboard
-      </div>
-
-      <h2 className="text-7xl font-black leading-[1.05] mb-8">
-        Create Your
-        <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-          Dream Bot
-        </span>
-      </h2>
-
-      <p className="text-gray-400 text-xl leading-relaxed max-w-2xl mb-10">
-        Phoenix MD menghadirkan pengalaman jadibot modern dengan dashboard realtime,
-        economy system, AI tools, casino game, dan management group premium.
-      </p>
-
-      <div className="flex flex-wrap gap-5 mb-12">
-        <button className="px-9 py-5 rounded-3xl bg-gradient-to-r from-cyan-500 to-purple-600 text-lg font-black hover:scale-105 transition shadow-2xl shadow-cyan-500/30">
-          Start Free Bot
-        </button>
-
-        <button className="px-9 py-5 rounded-3xl border border-white/10 bg-white/5 hover:bg-white/10 transition text-lg backdrop-blur-xl">
-          Explore Features
-        </button>
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-        {[
-          ['120K+', 'Users'],
-          ['99.9%', 'Uptime'],
-          ['24/7', 'Support'],
-          ['500+', 'Commands']
-        ].map((item, index) => (
-          <div
-            key={index}
-            className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-5 hover:scale-105 transition"
-          >
-            <h3 className="text-3xl font-black text-cyan-400">{item[0]}</h3>
-            <p className="text-gray-400 mt-2 text-sm">{item[1]}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div className="relative">
-      <div className="absolute inset-0 bg-cyan-500 blur-[140px] opacity-20"></div>
-
-      <div className="relative bg-white/5 border border-white/10 backdrop-blur-2xl rounded-[40px] p-8 shadow-2xl shadow-cyan-500/20 overflow-hidden">
-        <div className="absolute top-0 right-0 w-52 h-52 bg-cyan-500/10 rounded-full blur-3xl"></div>
-
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h3 className="text-3xl font-black">Phoenix Dashboard</h3>
-            <p className="text-gray-400 mt-2">Realtime User Statistics</p>
-          </div>
-
-          <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-full text-green-400 text-sm">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-            Online
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          {[
-            ['👤 User', 'op'],
-            ['💎 Status', 'Free 🆓'],
-            ['💰 Saldo', 'Rp672.673.839.619'],
-            ['🏦 Bank', 'Rp3.000.000.010.000'],
-            ['🎟️ Limit', '2481'],
-            ['🏆 Top Money', '#1'],
-            ['📶 Ping', '1960 ms']
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between bg-black/30 border border-white/10 rounded-2xl px-5 py-4 hover:border-cyan-500/20 transition"
-            >
-              <span className="text-gray-400">{item[0]}</span>
-              <span className="font-bold text-cyan-300">{item[1]}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-    <div className="text-center mb-16">
-      <h2 className="text-6xl font-black mb-5">
-        Choose Your Script
-      </h2>
-
-      <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-        Pilih script bot terbaik dengan dashboard modern dan fitur premium.
-      </p>
-    </div>
-
-    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-      {scripts.map((script, index) => (
-        <div
-          key={index}
-          className={`group relative bg-white/5 border border-white/10 rounded-[32px] overflow-hidden backdrop-blur-xl hover:scale-[1.03] transition duration-500 shadow-2xl ${script.glow}`}
-        >
-          <div className="relative h-72 overflow-hidden">
-            <img
-              src={script.image}
-              alt={script.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
-
-            <div className="absolute top-5 right-5 px-4 py-2 rounded-full text-xs font-black bg-black/60 backdrop-blur-xl border border-white/10">
-              {script.status}
-            </div>
-
-            <div className="absolute bottom-5 left-5 right-5">
-              <h3 className="text-3xl font-black mb-2">{script.name}</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                {script.description}
-              </p>
-            </div>
-          </div>
-
-          <div className="p-6">
-            <div className="flex flex-wrap gap-2 mb-6">
-              {script.features.map((feature, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-2 rounded-xl bg-black/30 border border-white/10 text-xs text-cyan-300"
-                >
-                  {feature}
-                </span>
-              ))}
-            </div>
-
-            <button
-              onClick={() => {
-                if (script.status === 'ONLINE') {
-                  alert(
-                    'Untuk menjadi bot secara GRATIS kamu akan melewati safelink terlebih dahulu.\\n\\nTekan lanjutkan untuk menuju safelink atau batalkan untuk kembali.'
-                  )
-                }
-              }}
-              className={`w-full py-4 rounded-2xl font-black text-lg transition hover:scale-105 bg-gradient-to-r ${script.color}`}
-            >
-              {script.status === 'ONLINE' ? 'Select Script' : 'Coming Soon'}
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-    <div className="text-center mb-16">
-      <h2 className="text-6xl font-black mb-5">
-        Powerful Features
-      </h2>
-
-      <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-        Ratusan fitur modern untuk kebutuhan group, game, entertainment, dan automation.
-      </p>
-    </div>
-
-    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-      {menuCards.map((menu, index) => (
-        <div
-          key={index}
-          className="group bg-white/5 border border-white/10 rounded-[32px] p-8 hover:border-cyan-500/30 transition backdrop-blur-xl"
-        >
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center text-4xl mb-8 shadow-2xl shadow-cyan-500/20 group-hover:scale-110 transition">
-            {menu.icon}
-          </div>
-
-          <h3 className="text-3xl font-black mb-8">{menu.title}</h3>
-
-          <div className="flex flex-wrap gap-3">
-            {menu.commands.map((cmd, i) => (
-              <div
-                key={i}
-                className="px-4 py-3 rounded-2xl bg-black/30 border border-white/10 text-sm hover:border-cyan-500/20 hover:bg-cyan-500/10 transition"
-              >
-                {cmd}
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <section className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-    <div className="text-center mb-16">
-      <h2 className="text-6xl font-black mb-5">
-        Documentation
-      </h2>
-
-      <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-        Pelajari cara menggunakan command Phoenix MD dengan mudah.
-      </p>
-    </div>
-
-    <div className="grid lg:grid-cols-2 gap-8">
-      {scripts.map((script, index) => (
-        <div
-          key={index}
-          className="bg-white/5 border border-white/10 rounded-[32px] overflow-hidden backdrop-blur-xl"
-        >
-          <div className="relative h-56 overflow-hidden">
-            <img
-              src={script.image}
-              alt={script.name}
-              className="w-full h-full object-cover"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-
-            <div className="absolute bottom-6 left-6">
-              <h3 className="text-4xl font-black">{script.name}</h3>
-              <p className="text-gray-300 mt-2 max-w-lg text-sm">
-                {script.description}
-              </p>
-            </div>
-          </div>
-
-          <div className="p-8 space-y-5">
-            {script.docs.length > 0 ? (
-              script.docs.map((doc, i) => (
-                <div
-                  key={i}
-                  className="bg-black/30 border border-white/10 rounded-2xl p-5 flex items-start justify-between gap-5 hover:border-cyan-500/20 transition"
-                >
-                  <div>
-                    <h4 className="text-xl font-black text-cyan-400 mb-2">
-                      {doc.cmd}
-                    </h4>
-                    <p className="text-gray-400 text-sm">{doc.desc}</p>
-                  </div>
-
-                  <button className="px-4 py-2 rounded-xl bg-cyan-500/10 text-cyan-300 text-sm border border-cyan-500/20">
-                    Copy
-                  </button>
-                </div>
-              ))
-            ) : (
-              <div className="bg-black/30 border border-white/10 rounded-2xl p-8 text-center text-gray-500">
-                Documentation Coming Soon
-              </div>
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <section className="relative z-10 max-w-6xl mx-auto px-6 pb-28">
-    <div className="relative overflow-hidden bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10 rounded-[40px] p-16 backdrop-blur-2xl text-center shadow-2xl shadow-cyan-500/10">
-      <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/20 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-500/20 rounded-full blur-[120px]"></div>
-
-      <div className="relative z-10">
-        <h2 className="text-7xl font-black leading-tight mb-6">
-          Ready To Become
-          <span className="block bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-            A Phoenix User?
-          </span>
-        </h2>
-
-        <p className="text-gray-400 text-xl max-w-3xl mx-auto leading-relaxed mb-12">
-          Tambahkan bot secara GRATIS dan nikmati dashboard premium, fitur economy, casino game, dan automation modern.
-        </p>
-
-        <div className="flex flex-wrap justify-center gap-6">
-          <button
-            onClick={() =>
-              alert(
-                'Untuk menjadi bot secara GRATIS kamu akan melewati safelink terlebih dahulu.\\n\\nLanjutkan atau batalkan?'
-              )
-            }
-            className="px-10 py-5 rounded-3xl bg-gradient-to-r from-cyan-500 to-purple-600 text-xl font-black hover:scale-105 transition shadow-2xl shadow-cyan-500/30"
-          >
-            Add New Bot
-          </button>
-
-          <button className="px-10 py-5 rounded-3xl border border-white/10 bg-white/5 hover:bg-white/10 transition text-xl backdrop-blur-xl">
-            Join Community
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer className="relative z-10 border-t border-white/10 bg-black/30 backdrop-blur-xl">
-    <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div>
-        <h3 className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-          Phoenix Multi Device
-        </h3>
-        <p className="text-gray-500 mt-2 text-sm">
-          Modern WhatsApp Bot Dashboard © 2026
-        </p>
-      </div>
-
-      <div className="flex items-center gap-5 text-gray-400 text-sm">
-        <button className="hover:text-cyan-400 transition">Documentation</button>
-        <button className="hover:text-cyan-400 transition">Community</button>
-        <button className="hover:text-cyan-400 transition">Support</button>
-      </div>
-    </div>
-  </footer>
+      </div><button class="nav-btn" onclick="openPopup()">Add New Bot</button>
 </div>
 
-) }
+  </nav>  <section class="hero">
+    <div>
+      <h2>Create Your <span>Dream Bot</span></h2><p>
+    Phoenix MD menghadirkan dashboard modern dengan fitur economy,
+    AI tools, casino game, management group, dan automation premium.
+  </p>
+
+  <div class="hero-buttons">
+    <button class="btn-main" onclick="openPopup()">Start Free Bot</button>
+    <button class="btn-secondary">Explore Features</button>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="dashboard-title">
+    <div>
+      <h2 style="font-size:32px">Phoenix Dashboard</h2>
+      <p style="color:#aaa;margin-top:10px">Realtime User Statistics</p>
+    </div>
+
+    <div class="online">● Online</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card"><span>👤 User</span><strong>op</strong></div>
+    <div class="stat-card"><span>💎 Status</span><strong>Free 🆓</strong></div>
+    <div class="stat-card"><span>💰 Saldo</span><strong>Rp672.673.839.619</strong></div>
+    <div class="stat-card"><span>🏦 Bank</span><strong>Rp3.000.000.010.000</strong></div>
+    <div class="stat-card"><span>🎟️ Limit</span><strong>2481</strong></div>
+    <div class="stat-card"><span>📶 Ping</span><strong>1960 ms</strong></div>
+  </div>
+</div>
+
+  </section>  <section class="section">
+    <div class="section-title">
+      <h2>Choose Your Script</h2>
+      <p>Pilih script bot modern dengan tampilan premium dan fitur terbaik.</p>
+    </div><div class="scripts-grid">
+
+  <div class="script-card">
+    <div class="script-image">
+      <img src="https://files.catbox.moe/2m8m7w.jpg">
+      <div class="badge">ONLINE</div>
+    </div>
+
+    <div class="script-content">
+      <h3>Phoenix MD</h3>
+      <p>Bot modern dengan economy system, AI tools, game, dan group management.</p>
+
+      <div class="tags">
+        <div class="tag">Economy</div>
+        <div class="tag">AI System</div>
+        <div class="tag">Casino</div>
+        <div class="tag">Realtime</div>
+      </div>
+
+      <button class="select-btn" onclick="openPopup()">Select Script</button>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-image">
+      <img src="https://files.catbox.moe/v8fj6z.jpg">
+      <div class="badge">COMING SOON</div>
+    </div>
+
+    <div class="script-content">
+      <h3>Nebula Assistant</h3>
+      <p>Smart AI automation dengan sistem response premium modern.</p>
+
+      <div class="tags">
+        <div class="tag">AI</div>
+        <div class="tag">Automation</div>
+        <div class="tag">Security</div>
+      </div>
+
+      <button class="select-btn">Coming Soon</button>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-image">
+      <img src="https://files.catbox.moe/n5v1q0.jpg">
+      <div class="badge">COMING SOON</div>
+    </div>
+
+    <div class="script-content">
+      <h3>Zenith Music</h3>
+      <p>Entertainment music bot dengan visual modern futuristik.</p>
+
+      <div class="tags">
+        <div class="tag">Music</div>
+        <div class="tag">Streaming</div>
+        <div class="tag">Queue</div>
+      </div>
+
+      <button class="select-btn">Coming Soon</button>
+    </div>
+  </div>
+
+</div>
+
+  </section>  <section class="section">
+    <div class="section-title">
+      <h2>Bot Features</h2>
+      <p>Ratusan fitur modern untuk kebutuhan group, game, entertainment, dan automation.</p>
+    </div><div class="features-grid">
+
+  <div class="feature-card">
+    <div class="feature-icon">⚙️</div>
+    <h3>Main Menu</h3>
+    <div class="command-list">
+      <div class="command">.menu</div>
+      <div class="command">.profil</div>
+      <div class="command">.ping</div>
+      <div class="command">.runtime</div>
+      <div class="command">.owner</div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">👥</div>
+    <h3>Group Menu</h3>
+    <div class="command-list">
+      <div class="command">.kick</div>
+      <div class="command">.add</div>
+      <div class="command">.promote</div>
+      <div class="command">.demote</div>
+      <div class="command">.tagall</div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">💰</div>
+    <h3>Economy Menu</h3>
+    <div class="command-list">
+      <div class="command">.saldo</div>
+      <div class="command">.bank</div>
+      <div class="command">.deposit</div>
+      <div class="command">.withdraw</div>
+      <div class="command">.daily</div>
+    </div>
+  </div>
+
+</div>
+
+  </section>  <section class="section">
+    <div class="section-title">
+      <h2>Documentation</h2>
+      <p>Pelajari cara menggunakan command Phoenix MD.</p>
+    </div><div class="docs-grid">
+
+  <div class="doc-card">
+    <img src="https://files.catbox.moe/2m8m7w.jpg">
+
+    <div class="doc-content">
+      <h2>Phoenix MD</h2>
+
+      <div class="doc-item">
+        <h4>.menu</h4>
+        <p>Menampilkan seluruh menu bot.</p>
+      </div>
+
+      <div class="doc-item">
+        <h4>.saldo</h4>
+        <p>Melihat saldo user economy.</p>
+      </div>
+
+      <div class="doc-item">
+        <h4>.daily</h4>
+        <p>Claim hadiah harian economy.</p>
+      </div>
+
+      <div class="doc-item">
+        <h4>.slot</h4>
+        <p>Bermain slot machine.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  </section>  <section class="cta">
+    <div class="cta-box">
+      <h2>Ready To Become A Phoenix User?</h2><p>
+    Tambahkan bot secara GRATIS dan nikmati dashboard premium,
+    fitur economy, casino game, dan automation modern.
+  </p>
+
+  <div class="hero-buttons" style="justify-content:center">
+    <button class="btn-main" onclick="openPopup()">Add New Bot</button>
+    <button class="btn-secondary">Join Community</button>
+  </div>
+</div>
+
+  </section>  <footer>
+    © 2026 Phoenix Multi Device — Premium WhatsApp Bot Dashboard
+  </footer>  <script>
+    function openPopup() {
+      const lanjut = confirm(
+        'Untuk menjadi bot secara GRATIS kamu akan melewati safelink terlebih dahulu.\\n\\nTekan OK untuk lanjut atau Cancel untuk batalkan.'
+      )
+
+      if (lanjut) {
+        window.location.href = 'https://example.com'
+      }
+    }
+  </script></body>
+</html>
