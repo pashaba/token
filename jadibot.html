@@ -1,795 +1,988 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phoenix Multi Device</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Inter',sans-serif;
-      scroll-behavior:smooth;
-    }
-
-    body{
-      background:#0a0a0a;
-      color:#fff;
-      overflow-x:hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:
-      radial-gradient(circle at top left,rgba(255,255,255,.05),transparent 35%),
-      radial-gradient(circle at bottom right,rgba(255,255,255,.03),transparent 35%);
-      z-index:-1;
-    }
-
-    nav{
-      position:sticky;
-      top:0;
-      z-index:999;
-      backdrop-filter:blur(18px);
-      background:rgba(15,15,15,.7);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-
-    .nav-container{
-      max-width:1300px;
-      margin:auto;
-      padding:18px 25px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:15px;
-    }
-
-    .logo-box{
-      width:52px;
-      height:52px;
-      border-radius:16px;
-      background:#fff;
-      color:#000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      font-weight:800;
-    }
-
-    .logo h1{
-      font-size:25px;
-      font-weight:800;
-    }
-
-    .logo p{
-      color:#9f9f9f;
-      font-size:13px;
-    }
-
-    .nav-right{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-
-    .btn{
-      border:none;
-      padding:15px 22px;
-      border-radius:14px;
-      cursor:pointer;
-      font-weight:700;
-      transition:.3s;
-    }
-
-    .btn-white{
-      background:#fff;
-      color:#000;
-    }
-
-    .btn-dark{
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff;
-    }
-
-    .btn:hover{
-      transform:translateY(-3px);
-    }
-
-    .menu-toggle{
-      width:52px;
-      height:52px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.04);
-      display:none;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap:5px;
-      cursor:pointer;
-    }
-
-    .menu-toggle span{
-      width:23px;
-      height:2px;
-      background:#fff;
-      border-radius:999px;
-      transition:.3s;
-    }
-
-    .mobile-menu{
-      position:fixed;
-      top:0;
-      right:-100%;
-      width:320px;
-      height:100vh;
-      background:#111;
-      border-left:1px solid rgba(255,255,255,.06);
-      z-index:9999;
-      transition:.35s;
-      padding:100px 25px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-
-    .mobile-menu.active{
-      right:0;
-    }
-
-    .mobile-menu a{
-      text-decoration:none;
-      color:#fff;
-      padding:18px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      transition:.3s;
-    }
-
-    .mobile-menu a:hover{
-      background:#fff;
-      color:#000;
-    }
-
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.65);
-      backdrop-filter:blur(5px);
-      display:none;
-      z-index:9998;
-    }
-
-    .overlay.active{
-      display:block;
-    }
-
-    .hero{
-      max-width:1300px;
-      margin:auto;
-      padding:110px 25px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:60px;
-      align-items:center;
-    }
-
-    .hero h2{
-      font-size:78px;
-      line-height:1.05;
-      font-weight:900;
-      margin-bottom:25px;
-    }
-
-    .hero h2 span{
-      color:#8f8f8f;
-    }
-
-    .hero p{
-      color:#9f9f9f;
-      line-height:1.8;
-      font-size:17px;
-      margin-bottom:35px;
-      max-width:620px;
-    }
-
-    .hero-buttons{
-      display:flex;
-      gap:16px;
-      flex-wrap:wrap;
-    }
-
-    .dashboard{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:30px;
-      padding:32px;
-      backdrop-filter:blur(12px);
-    }
-
-    .dashboard-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:28px;
-    }
-
-    .dashboard-header h3{
-      font-size:30px;
-    }
-
-    .online{
-      padding:10px 16px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      font-size:13px;
-    }
-
-    .stats{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .stat{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:18px;
-      padding:18px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .section{
-      max-width:1300px;
-      margin:auto;
-      padding:100px 25px;
-    }
-
-    .section-title{
-      text-align:center;
-      margin-bottom:70px;
-    }
-
-    .section-title h2{
-      font-size:58px;
-      margin-bottom:15px;
-    }
-
-    .section-title p{
-      color:#9f9f9f;
-      max-width:700px;
-      margin:auto;
-      line-height:1.8;
-    }
-
-    .scripts{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:30px;
-    }
-
-    .card{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:28px;
-      overflow:hidden;
-      transition:.3s;
-    }
-
-    .card:hover{
-      transform:translateY(-8px);
-    }
-
-    .card img{
-      width:100%;
-      height:240px;
-      object-fit:cover;
-    }
-
-    .card-content{
-      padding:28px;
-    }
-
-    .badge{
-      display:inline-block;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.06);
-      margin-bottom:18px;
-      font-size:12px;
-    }
-
-    .card h3{
-      font-size:30px;
-      margin-bottom:12px;
-    }
-
-    .card p{
-      color:#9f9f9f;
-      line-height:1.8;
-      margin-bottom:25px;
-    }
-
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-bottom:25px;
-    }
-
-    .tag{
-      padding:10px 14px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      font-size:13px;
-    }
-
-    .features{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:28px;
-    }
-
-    .feature{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:28px;
-      padding:35px;
-    }
-
-    .feature-icon{
-      width:70px;
-      height:70px;
-      border-radius:20px;
-      background:#fff;
-      color:#000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:30px;
-      margin-bottom:22px;
-    }
-
-    .feature h3{
-      font-size:32px;
-      margin-bottom:22px;
-    }
-
-    .commands{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .command{
-      padding:11px 15px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
-      font-size:13px;
-    }
-
-    .popup{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.7);
-      backdrop-filter:blur(8px);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:99999;
-      padding:20px;
-    }
-
-    .popup-box{
-      width:100%;
-      max-width:480px;
-      background:#111;
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:30px;
-      padding:40px;
-      text-align:center;
-    }
-
-    .popup-icon{
-      width:90px;
-      height:90px;
-      border-radius:25px;
-      background:#fff;
-      color:#000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:42px;
-      margin:auto;
-      margin-bottom:25px;
-    }
-
-    .popup h2{
-      font-size:38px;
-      margin-bottom:15px;
-    }
-
-    .popup p{
-      color:#9f9f9f;
-      line-height:1.8;
-      margin-bottom:30px;
-    }
-
-    .popup-buttons{
-      display:flex;
-      gap:14px;
-    }
-
-    .popup-buttons button{
-      flex:1;
-    }
-
-    footer{
-      padding:35px;
-      text-align:center;
-      border-top:1px solid rgba(255,255,255,.06);
-      color:#8f8f8f;
-      background:#0f0f0f;
-    }
-
-    @media(max-width:900px){
-
-      .btn-white{
-        display:none;
-      }
-
-      .menu-toggle{
-        display:flex;
-      }
-
-      .hero h2{
-        font-size:52px;
-      }
-
-      .section-title h2{
-        font-size:44px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoenix Platform</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,rgba(255,255,255,.05),transparent 35%),
+radial-gradient(circle at bottom right,rgba(255,255,255,.03),transparent 35%);
+z-index:-1;
+}
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:9999;
+backdrop-filter:blur(20px);
+background:rgba(10,10,10,.7);
+border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav-container{
+max-width:1400px;
+margin:auto;
+padding:20px 30px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo-icon{
+width:55px;
+height:55px;
+border-radius:18px;
+background:white;
+color:black;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:800;
+}
+
+.logo h1{
+font-size:24px;
+font-weight:800;
+}
+
+.logo p{
+font-size:13px;
+color:#999;
+}
+
+.nav-buttons{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.btn{
+padding:15px 24px;
+border:none;
+border-radius:15px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.btn-white{
+background:white;
+color:black;
+}
+
+.btn-dark{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+color:white;
+}
+
+.menu-toggle{
+width:52px;
+height:52px;
+border-radius:15px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:5px;
+cursor:pointer;
+}
+
+.menu-toggle span{
+width:22px;
+height:2px;
+background:white;
+border-radius:999px;
+}
+
+.mobile-menu{
+position:fixed;
+top:0;
+right:-100%;
+width:320px;
+height:100vh;
+background:#0f0f0f;
+border-left:1px solid rgba(255,255,255,.06);
+z-index:99999;
+padding:100px 25px;
+display:flex;
+flex-direction:column;
+gap:16px;
+transition:.4s;
+}
+
+.mobile-menu.active{
+right:0;
+}
+
+.mobile-menu a{
+padding:18px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+.mobile-menu a:hover{
+background:white;
+color:black;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+backdrop-filter:blur(5px);
+display:none;
+z-index:99998;
+}
+
+.overlay.active{
+display:block;
+}
+
+.hero{
+min-height:100vh;
+max-width:1400px;
+margin:auto;
+padding:150px 30px 100px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:70px;
+align-items:center;
+}
+
+.hero-badge{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:14px 20px;
+border-radius:999px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+margin-bottom:30px;
+font-size:14px;
+}
+
+.hero h1{
+font-size:85px;
+line-height:1;
+font-weight:900;
+margin-bottom:30px;
+}
+
+.hero h1 span{
+color:#8f8f8f;
+}
+
+.hero p{
+color:#9f9f9f;
+font-size:18px;
+line-height:1.9;
+max-width:650px;
+margin-bottom:40px;
+}
+
+.hero-buttons{
+display:flex;
+gap:16px;
+flex-wrap:wrap;
+margin-bottom:45px;
+}
+
+.hero-stats{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.hero-stat{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+border-radius:24px;
+padding:24px;
+min-width:170px;
+}
+
+.hero-stat h3{
+font-size:34px;
+margin-bottom:8px;
+}
+
+.hero-stat p{
+margin:0;
+font-size:14px;
+}
+
+.preview-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+border-radius:35px;
+padding:30px;
+backdrop-filter:blur(15px);
+}
+
+.preview-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:35px;
+}
+
+.dots{
+display:flex;
+gap:8px;
+}
+
+.dots span{
+width:12px;
+height:12px;
+border-radius:50%;
+background:white;
+opacity:.8;
+}
+
+.preview-content{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.preview-box{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+border-radius:22px;
+padding:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.preview-box span{
+color:#9f9f9f;
+}
+
+.preview-box strong{
+font-size:17px;
+}
+
+.section{
+max-width:1400px;
+margin:auto;
+padding:120px 30px;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:70px;
+}
+
+.section-title h2{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.section-title p{
+color:#9f9f9f;
+max-width:750px;
+margin:auto;
+line-height:1.9;
+}
+
+.script-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.script-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+border-radius:30px;
+overflow:hidden;
+transition:.3s;
+}
+
+.script-card:hover{
+transform:translateY(-8px);
+}
+
+.script-card img{
+width:100%;
+height:240px;
+object-fit:cover;
+}
+
+.script-content{
+padding:30px;
+}
+
+.script-badge{
+display:inline-block;
+padding:9px 16px;
+border-radius:999px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.06);
+font-size:12px;
+margin-bottom:20px;
+}
+
+.script-content h3{
+font-size:34px;
+margin-bottom:15px;
+}
+
+.script-content p{
+color:#9f9f9f;
+line-height:1.8;
+margin-bottom:25px;
+}
+
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:30px;
+}
+
+.tag{
+padding:11px 15px;
+border-radius:12px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+font-size:13px;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:28px;
+}
+
+.feature-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+border-radius:30px;
+padding:35px;
+}
+
+.feature-icon{
+width:75px;
+height:75px;
+border-radius:24px;
+background:white;
+color:black;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+margin-bottom:25px;
+}
+
+.feature-card h3{
+font-size:35px;
+margin-bottom:25px;
+}
+
+.commands{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.command{
+padding:11px 14px;
+border-radius:12px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+font-size:13px;
+}
+
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+backdrop-filter:blur(8px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:999999;
+padding:20px;
+}
+
+.popup-box{
+width:100%;
+max-width:500px;
+background:#101010;
+border:1px solid rgba(255,255,255,.06);
+border-radius:35px;
+padding:45px;
+text-align:center;
+}
+
+.popup-icon{
+width:95px;
+height:95px;
+border-radius:28px;
+background:white;
+color:black;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+margin:auto;
+margin-bottom:28px;
+}
+
+.popup h2{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.popup p{
+color:#9f9f9f;
+line-height:1.9;
+margin-bottom:35px;
+}
+
+.popup-buttons{
+display:flex;
+gap:14px;
+}
+
+.popup-buttons button{
+flex:1;
+}
+
+footer{
+padding:40px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.06);
+color:#8f8f8f;
+background:#0a0a0a;
+}
+
+@media(max-width:900px){
+
+.hero h1{
+font-size:58px;
+}
+
+.section-title h2{
+font-size:45px;
+}
+
+.btn-white{
+display:none;
+}
+
+.menu-toggle{
+display:flex;
+}
+
+}
+
+</style>
 </head>
 <body>
 
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#home" onclick="closeMenu()">🏠 Home</a>
-  <a href="#scripts" onclick="closeMenu()">🤖 Scripts</a>
-  <a href="#features" onclick="closeMenu()">⚡ Features</a>
-  <a href="#docs" onclick="closeMenu()">📘 Documentation</a>
-  <a href="#" onclick="openPopup()">🚀 Add New Bot</a>
+<a href="#home" onclick="closeMenu()">🏠 Home</a>
+<a href="#scripts" onclick="closeMenu()">🤖 Scripts</a>
+<a href="#features" onclick="closeMenu()">⚡ Features</a>
+<a href="#docs" onclick="closeMenu()">📘 Documentation</a>
+<a href="#" onclick="openPopup('phoenix')">🚀 Create New Bot</a>
 </div>
 
 <div class="popup" id="popup">
-  <div class="popup-box">
-    <div class="popup-icon">🚀</div>
+<div class="popup-box">
 
-    <h2>Free Bot Access</h2>
+<div class="popup-icon">🚀</div>
 
-    <p>
-      Untuk menjadi bot secara GRATIS kamu harus melewati safelink terlebih dahulu.
-    </p>
+<h2>Continue Access</h2>
 
-    <div class="popup-buttons">
-      <button class="btn btn-dark" onclick="closePopup()">Batalkan</button>
-      <button class="btn btn-white" onclick="goSafelink()">Lanjutkan</button>
-    </div>
-  </div>
+<p>
+Untuk membuat bot gratis kamu harus melewati safelink terlebih dahulu.
+Setelah selesai kamu akan diarahkan ke halaman koneksi bot.
+</p>
+
+<div class="popup-buttons">
+<button class="btn btn-dark" onclick="closePopup()">
+Cancel
+</button>
+
+<button class="btn btn-white" onclick="continueSafelink()">
+Continue
+</button>
+</div>
+
+</div>
 </div>
 
 <nav>
-  <div class="nav-container">
 
-    <div class="logo">
-      <div class="logo-box">🔥</div>
+<div class="nav-container">
 
-      <div>
-        <h1>Phoenix Multi Device</h1>
-        <p>Professional WhatsApp Bot Platform</p>
-      </div>
-    </div>
+<div class="logo">
 
-    <div class="nav-right">
-      <button class="btn btn-white" onclick="openPopup()">Add New Bot</button>
+<div class="logo-icon">🔥</div>
 
-      <div class="menu-toggle" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+<div>
+<h1>Phoenix Platform</h1>
+<p>Modern WhatsApp Automation</p>
+</div>
 
-  </div>
+</div>
+
+<div class="nav-buttons">
+
+<button class="btn btn-white" onclick="document.getElementById('scripts').scrollIntoView({behavior:'smooth'})">
+Explore Scripts
+</button>
+
+<div class="menu-toggle" onclick="toggleMenu()">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+</div>
+
+</div>
+
 </nav>
 
 <section class="hero" id="home">
 
-  <div>
-    <h2>
-      Build Your
-      <span>Modern Bot</span>
-    </h2>
+<div>
 
-    <p>
-      Phoenix MD menghadirkan dashboard modern dengan fitur economy,
-      AI tools, casino game, dan automation premium.
-    </p>
+<div class="hero-badge">
+⚡ Professional WhatsApp Bot Platform
+</div>
 
-    <div class="hero-buttons">
-      <button class="btn btn-white" onclick="openPopup()">Start Free Bot</button>
-      <button class="btn btn-dark">Explore Features</button>
-    </div>
-  </div>
+<h1>
+Build Modern
+Bots
+<span>Without Complexity.</span>
+</h1>
 
-  <div class="dashboard">
+<p>
+Phoenix Platform menghadirkan pengalaman membuat bot WhatsApp
+dengan tampilan modern, sistem cepat, fitur premium,
+dan automation profesional untuk semua kebutuhan.
+</p>
 
-    <div class="dashboard-header">
-      <div>
-        <h3>Phoenix Dashboard</h3>
-      </div>
+<div class="hero-buttons">
 
-      <div class="online">● Online</div>
-    </div>
+<button class="btn btn-white"
+onclick="document.getElementById('scripts').scrollIntoView({behavior:'smooth'})">
+Explore Scripts
+</button>
 
-    <div class="stats">
+<button class="btn btn-dark">
+Documentation
+</button>
 
-      <div class="stat">
-        <span>👤 User</span>
-        <strong>op</strong>
-      </div>
+</div>
 
-      <div class="stat">
-        <span>💎 Status</span>
-        <strong>Free 🆓</strong>
-      </div>
+<div class="hero-stats">
 
-      <div class="stat">
-        <span>💰 Saldo</span>
-        <strong>Rp672.673.839.619</strong>
-      </div>
+<div class="hero-stat">
+<h3>120K+</h3>
+<p>Active Users</p>
+</div>
 
-      <div class="stat">
-        <span>🏦 Bank</span>
-        <strong>Rp3.000.000.010.000</strong>
-      </div>
+<div class="hero-stat">
+<h3>99.9%</h3>
+<p>Server Uptime</p>
+</div>
 
-      <div class="stat">
-        <span>🏆 Rank</span>
-        <strong>#1 Global</strong>
-      </div>
+<div class="hero-stat">
+<h3>24/7</h3>
+<p>Automation</p>
+</div>
 
-    </div>
+</div>
 
-  </div>
+</div>
+
+<div>
+
+<div class="preview-card">
+
+<div class="preview-top">
+
+<div class="dots">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<small>Phoenix Platform</small>
+
+</div>
+
+<div class="preview-content">
+
+<div class="preview-box">
+<span>🤖 Multi Device</span>
+<strong>Realtime Connected</strong>
+</div>
+
+<div class="preview-box">
+<span>⚡ Fast Response</span>
+<strong>0 Delay System</strong>
+</div>
+
+<div class="preview-box">
+<span>🧠 AI Automation</span>
+<strong>Premium Features</strong>
+</div>
+
+<div class="preview-box">
+<span>🔒 Security</span>
+<strong>Encrypted Access</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 <section class="section" id="scripts">
 
-  <div class="section-title">
-    <h2>Choose Your Script</h2>
+<div class="section-title">
+<h2>Choose Your Script</h2>
 
-    <p>
-      Pilih script bot modern dengan tampilan premium dan fitur terbaik.
-    </p>
-  </div>
+<p>
+Pilih script bot terbaik dengan fitur modern dan pengalaman premium.
+</p>
+</div>
 
-  <div class="scripts">
+<div class="script-grid">
 
-    <div class="card">
-      <img src="https://files.catbox.moe/2m8m7w.jpg">
+<div class="script-card">
 
-      <div class="card-content">
+<img src="https://files.catbox.moe/2m8m7w.jpg">
 
-        <div class="badge">ONLINE</div>
+<div class="script-content">
 
-        <h3>Phoenix MD</h3>
+<div class="script-badge">
+AVAILABLE
+</div>
 
-        <p>
-          Bot modern dengan economy system, AI tools,
-          game, dan management group premium.
-        </p>
+<h3>Phoenix MD</h3>
 
-        <div class="tags">
-          <div class="tag">Economy</div>
-          <div class="tag">AI</div>
-          <div class="tag">Casino</div>
-          <div class="tag">Realtime</div>
-        </div>
+<p>
+Bot WhatsApp modern dengan fitur economy,
+AI tools, casino system, automation,
+group management, dan realtime system.
+</p>
 
-        <button class="btn btn-white" onclick="openPopup()">
-          Select Script
-        </button>
+<div class="tags">
 
-      </div>
-    </div>
+<div class="tag">Economy</div>
+<div class="tag">AI</div>
+<div class="tag">Casino</div>
+<div class="tag">Automation</div>
 
-    <div class="card">
-      <img src="https://files.catbox.moe/v8fj6z.jpg">
+</div>
 
-      <div class="card-content">
+<button class="btn btn-white"
+onclick="openPopup('phoenix')">
+Create New Bot
+</button>
 
-        <div class="badge">COMING SOON</div>
+</div>
 
-        <h3>Nebula Assistant</h3>
+</div>
 
-        <p>
-          Smart automation assistant dengan sistem AI modern premium.
-        </p>
+<div class="script-card">
 
-        <button class="btn btn-dark">
-          Coming Soon
-        </button>
+<img src="https://files.catbox.moe/v8fj6z.jpg">
 
-      </div>
-    </div>
+<div class="script-content">
 
-    <div class="card">
-      <img src="https://files.catbox.moe/n5v1q0.jpg">
+<div class="script-badge">
+COMING SOON
+</div>
 
-      <div class="card-content">
+<h3>Nebula Assistant</h3>
 
-        <div class="badge">COMING SOON</div>
+<p>
+Modern AI assistant platform dengan
+automation dan smart integration system.
+</p>
 
-        <h3>Zenith Music</h3>
+<button class="btn btn-dark">
+Coming Soon
+</button>
 
-        <p>
-          Entertainment music bot dengan UI modern dan realtime system.
-        </p>
+</div>
 
-        <button class="btn btn-dark">
-          Coming Soon
-        </button>
+</div>
 
-      </div>
-    </div>
+<div class="script-card">
 
-  </div>
+<img src="https://files.catbox.moe/n5v1q0.jpg">
+
+<div class="script-content">
+
+<div class="script-badge">
+COMING SOON
+</div>
+
+<h3>Zenith Music</h3>
+
+<p>
+Entertainment music bot dengan realtime
+audio system dan modern dashboard.
+</p>
+
+<button class="btn btn-dark">
+Coming Soon
+</button>
+
+</div>
+
+</div>
+
+<div class="script-card">
+
+<img src="https://files.catbox.moe/2m8m7w.jpg">
+
+<div class="script-content">
+
+<div class="script-badge">
+COMING SOON
+</div>
+
+<h3>Nova Security</h3>
+
+<p>
+Security automation bot dengan
+protection tools dan smart monitoring.
+</p>
+
+<button class="btn btn-dark">
+Coming Soon
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 <section class="section" id="features">
 
-  <div class="section-title">
-    <h2>Bot Features</h2>
+<div class="section-title">
 
-    <p>
-      Ratusan fitur modern untuk kebutuhan group,
-      entertainment, economy, dan automation.
-    </p>
-  </div>
+<h2>Bot Features</h2>
 
-  <div class="features">
+<p>
+Ratusan fitur modern untuk kebutuhan group,
+automation, entertainment, dan economy.
+</p>
 
-    <div class="feature">
-      <div class="feature-icon">⚙️</div>
+</div>
 
-      <h3>Main Menu</h3>
+<div class="features">
 
-      <div class="commands">
-        <div class="command">.menu</div>
-        <div class="command">.profil</div>
-        <div class="command">.ping</div>
-        <div class="command">.runtime</div>
-        <div class="command">.owner</div>
-      </div>
-    </div>
+<div class="feature-card">
 
-    <div class="feature">
-      <div class="feature-icon">👥</div>
+<div class="feature-icon">⚙️</div>
 
-      <h3>Group Menu</h3>
+<h3>Main Menu</h3>
 
-      <div class="commands">
-        <div class="command">.kick</div>
-        <div class="command">.add</div>
-        <div class="command">.promote</div>
-        <div class="command">.demote</div>
-        <div class="command">.tagall</div>
-      </div>
-    </div>
+<div class="commands">
 
-    <div class="feature">
-      <div class="feature-icon">💰</div>
+<div class="command">.menu</div>
+<div class="command">.profil</div>
+<div class="command">.runtime</div>
+<div class="command">.owner</div>
+<div class="command">.ping</div>
 
-      <h3>Economy Menu</h3>
+</div>
 
-      <div class="commands">
-        <div class="command">.saldo</div>
-        <div class="command">.bank</div>
-        <div class="command">.deposit</div>
-        <div class="command">.withdraw</div>
-        <div class="command">.daily</div>
-      </div>
-    </div>
+</div>
 
-  </div>
+<div class="feature-card">
+
+<div class="feature-icon">👥</div>
+
+<h3>Group Menu</h3>
+
+<div class="commands">
+
+<div class="command">.kick</div>
+<div class="command">.add</div>
+<div class="command">.promote</div>
+<div class="command">.demote</div>
+<div class="command">.tagall</div>
+
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon">💰</div>
+
+<h3>Economy Menu</h3>
+
+<div class="commands">
+
+<div class="command">.saldo</div>
+<div class="command">.bank</div>
+<div class="command">.daily</div>
+<div class="command">.withdraw</div>
+<div class="command">.deposit</div>
+
+</div>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon">🎰</div>
+
+<h3>Casino Menu</h3>
+
+<div class="commands">
+
+<div class="command">.slot</div>
+<div class="command">.casino</div>
+<div class="command">.blackjack</div>
+<div class="command">.hit</div>
+<div class="command">.stand</div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 <section class="section" id="docs">
 
-  <div class="section-title">
-    <h2>Documentation</h2>
+<div class="section-title">
 
-    <p>
-      Pelajari cara menggunakan command Phoenix Multi Device.
-    </p>
-  </div>
+<h2>Documentation</h2>
 
-  <div class="features">
+<p>
+Pelajari cara menggunakan command dan sistem Phoenix MD.
+</p>
 
-    <div class="feature">
+</div>
 
-      <div class="feature-icon">📘</div>
+<div class="features">
 
-      <h3>Phoenix MD Docs</h3>
+<div class="feature-card">
 
-      <div class="commands">
-        <div class="command">.menu = menampilkan menu</div>
-        <div class="command">.saldo = cek saldo</div>
-        <div class="command">.daily = claim harian</div>
-        <div class="command">.slot = bermain slot</div>
-      </div>
+<div class="feature-icon">📘</div>
 
-    </div>
+<h3>How To Use</h3>
 
-  </div>
+<div class="commands">
+
+<div class="command">.menu = menampilkan menu</div>
+<div class="command">.saldo = cek saldo user</div>
+<div class="command">.daily = claim hadiah harian</div>
+<div class="command">.slot = bermain slot game</div>
+<div class="command">.kick = kick member group</div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 <footer>
-  © 2026 Phoenix Multi Device — Professional Landing Page
+© 2026 Phoenix Platform — Professional Landing Page
 </footer>
 
 <script>
 
+let selectedScript = null
+
 function toggleMenu(){
-  document.getElementById('mobileMenu').classList.toggle('active')
-  document.getElementById('overlay').classList.toggle('active')
+document.getElementById('mobileMenu').classList.toggle('active')
+document.getElementById('overlay').classList.toggle('active')
 }
 
 function closeMenu(){
-  document.getElementById('mobileMenu').classList.remove('active')
-  document.getElementById('overlay').classList.remove('active')
+document.getElementById('mobileMenu').classList.remove('active')
+document.getElementById('overlay').classList.remove('active')
 }
 
-function openPopup(){
-  document.getElementById('popup').style.display='flex'
+function openPopup(script){
+
+selectedScript = script
+
+document.getElementById('popup').style.display='flex'
 }
 
 function closePopup(){
-  document.getElementById('popup').style.display='none'
+document.getElementById('popup').style.display='none'
 }
 
-function goSafelink(){
-  window.location.href='https://sfl.gl/8W3qpI'
+function continueSafelink(){
+
+if(selectedScript === 'phoenix'){
+window.location.href='https://sfl.gl/8W3qpI'
+}
+
 }
 
 </script>
