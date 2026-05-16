@@ -1,6 +1,276 @@
-<section class="hero" id="home">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Phoenix Platform</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,rgba(255,255,255,.05),transparent 35%),
+radial-gradient(circle at bottom right,rgba(255,255,255,.03),transparent 35%);
+z-index:-1;
+}
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:9999;
+backdrop-filter:blur(18px);
+background:rgba(10,10,10,.75);
+border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav-container{
+max-width:1200px;
+margin:auto;
+padding:20px 30px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo-icon{
+width:55px;
+height:55px;
+border-radius:18px;
+background:white;
+color:black;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:800;
+box-shadow:0 10px 30px rgba(255,255,255,.1);
+}
+
+.logo h1{
+font-size:24px;
+font-weight:800;
+}
+
+.logo p{
+font-size:13px;
+color:#9f9f9f;
+margin-top:2px;
+}
+
+.hero{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:150px 25px 80px;
+max-width:1200px;
+margin:auto;
+width:100%;
+}
+
+.announcement-box{
+width:100%;
+max-width:850px;
+padding:75px 55px;
+border-radius:40px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+backdrop-filter:blur(18px);
+text-align:center;
+position:relative;
+overflow:hidden;
+box-shadow:0 20px 80px rgba(0,0,0,.45);
+}
+
+.announcement-box::before{
+content:'';
+position:absolute;
+top:-200px;
+left:-200px;
+width:420px;
+height:420px;
+background:rgba(255,255,255,.04);
+border-radius:50%;
+filter:blur(90px);
+}
+
+.hero-badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:14px 24px;
+border-radius:999px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+margin-bottom:35px;
+font-size:14px;
+font-weight:600;
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-size:72px;
+line-height:1.05;
+font-weight:900;
+margin-bottom:28px;
+position:relative;
+z-index:2;
+}
+
+.hero h1 span{
+display:block;
+color:#8f8f8f;
+margin-top:8px;
+}
+
+.hero p{
+font-size:18px;
+line-height:2;
+color:#a1a1a1;
+max-width:680px;
+margin:auto;
+margin-bottom:45px;
+position:relative;
+z-index:2;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+position:relative;
+z-index:2;
+}
+
+.btn{
+padding:18px 36px;
+border:none;
+border-radius:18px;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+}
+
+.btn-white{
+background:white;
+color:black;
+box-shadow:0 10px 30px rgba(255,255,255,.15);
+}
+
+footer{
+padding:35px 20px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.06);
+color:#8f8f8f;
+background:#0a0a0a;
+font-size:14px;
+}
+
+@media(max-width:768px){
+
+.nav-container{
+padding:18px 20px;
+}
+
+.logo-icon{
+width:48px;
+height:48px;
+font-size:24px;
+border-radius:15px;
+}
+
+.logo h1{
+font-size:20px;
+}
+
+.hero{
+padding:130px 20px 70px;
+}
+
+.announcement-box{
+padding:55px 28px;
+border-radius:32px;
+}
+
+.hero h1{
+font-size:46px;
+}
+
+.hero p{
+font-size:16px;
+line-height:1.9;
+}
+
+.btn{
+width:100%;
+padding:17px 25px;
+font-size:15px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+
+<div class="nav-container">
+
+<div class="logo">
+
+<div class="logo-icon">🔥</div>
 
 <div>
+<h1>Phoenix Platform</h1>
+<p>Official Announcement</p>
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div class="announcement-box">
 
 <div class="hero-badge">
 📢 Official Announcement
@@ -8,76 +278,35 @@
 
 <h1>
 Layanan Phoenix Platform
-<span>Telah Dipindahkan.</span>
+<span>Telah Dipindahkan</span>
 </h1>
 
 <p>
-Mulai sekarang seluruh layanan Phoenix Platform
-telah dipindahkan ke website baru untuk meningkatkan
-stabilitas server, performa akses,
-dan pengalaman pengguna yang lebih baik.
+Untuk meningkatkan kualitas layanan,
+kecepatan akses server,
+dan stabilitas platform,
+seluruh layanan Phoenix Platform sekarang
+telah dipindahkan ke website baru.
 
-Silahkan lanjut menggunakan layanan melalui website resmi terbaru di bawah ini.
+Silahkan lanjut menggunakan layanan melalui website resmi terbaru kami.
 </p>
 
 <div class="hero-buttons">
 
 <button class="btn btn-white"
 onclick="window.location.href='https://polar.infinityfree.me/'">
-Kunjungi Website Baru
+Pindah Ke Website Baru
 </button>
-
-<button class="btn btn-dark"
-onclick="window.open('https://polar.infinityfree.me/')">
-Open Platform
-</button>
-
-</div>
-
-</div>
-
-<div>
-
-<div class="preview-card">
-
-<div class="preview-top">
-
-<div class="dots">
-<span></span>
-<span></span>
-<span></span>
-</div>
-
-<small>Migration Information</small>
-
-</div>
-
-<div class="preview-content">
-
-<div class="preview-box">
-<span>🚀 New Platform</span>
-<strong>polar.infinityfree.me</strong>
-</div>
-
-<div class="preview-box">
-<span>⚡ Better Performance</span>
-<strong>Optimized System</strong>
-</div>
-
-<div class="preview-box">
-<span>🔒 Improved Security</span>
-<strong>Safer Access</strong>
-</div>
-
-<div class="preview-box">
-<span>🌐 Updated Services</span>
-<strong>All Features Moved</strong>
-</div>
-
-</div>
 
 </div>
 
 </div>
 
 </section>
+
+<footer>
+© 2026 Phoenix Platform — All services moved to new website
+</footer>
+
+</body>
+</html>
